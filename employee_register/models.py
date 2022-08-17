@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Position(models.Model):
@@ -12,4 +13,14 @@ class Employee(models.Model):
     emp_code = models.CharField(max_length=100)
     mobile = models.CharField(max_length=15)
     position = models.ForeignKey(Position, on_delete= models.CASCADE)
+
+
+class User(AbstractUser):
+    name=models.CharField(max_length=255)
+    email=models.EmailField(max_length=255, unique=True)
+    password=models.CharField(max_length=255)
+    username=None
+
+    USERNAME_FIELD= 'email'
+    REQUIRED_FIELDS= []
 
